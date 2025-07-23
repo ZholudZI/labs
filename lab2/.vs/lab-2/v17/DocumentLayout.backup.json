@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\user\\Desktop\\C#\\labs\\lab-2\\",
+  "WorkspaceRootPath": "C:\\Users\\user\\Desktop\\C#\\labs\\lab2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CF98E8E4-AFD7-4048-A4BE-E130ECF25FDE}|lab-2.csproj|c:\\users\\user\\desktop\\c#\\labs\\lab-2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{CF98E8E4-AFD7-4048-A4BE-E130ECF25FDE}|lab-2.csproj|c:\\users\\user\\desktop\\c#\\labs\\lab2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CF98E8E4-AFD7-4048-A4BE-E130ECF25FDE}|lab-2.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -20,11 +20,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Desktop\\C#\\labs\\lab-2\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\C#\\labs\\lab2\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\user\\Desktop\\C#\\labs\\lab-2\\Program.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\C#\\labs\\lab2\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABOAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAoAAABRAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-20T10:20:11.541Z",
               "EditorCaption": ""
