@@ -13,10 +13,10 @@ class Class : Stats
 
 }
 
-//class Character : IFighter // Что-то не так
-//{ 
-	
-//}
+class Character : IFighter
+{
+
+}
 
 interface IFighter
 {
