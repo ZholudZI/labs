@@ -62,8 +62,8 @@ string toNormalText(string str, int swap)
 	return result;
 }
 
-//Съешь ещё этих мягких французских булок, да выпей же чаю
-//The quick brown fox jumps over the lazy dog
+//Съешь ещё этих мягких французских булок, да выпей же чаю - все буквы русского алфавита
+//The quick brown fox jumps over the lazy dog - все буквы английского алфавита
 Console.WriteLine(toCaesarCipher("Съешь ещё этих мягких французских булок, да выпей же чаю", SWAP));
 Console.WriteLine(toCaesarCipher("The quick brown fox jumps over the lazy dog", SWAP));
 Console.WriteLine("-------------------------------------------------------------------------------");
