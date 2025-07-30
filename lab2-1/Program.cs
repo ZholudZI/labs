@@ -1,27 +1,35 @@
-﻿abstract class Stats
+﻿class Program
 {
-	int health = 0;
-	int strength = 0;
+    static void Main( string[] args )
+    {
+        Dictionary<>
+    }
 }
 
-class Race : Stats
+class Class
 {
-
-}
-class Class : Stats
-{
-
+    public int Health = 0;
+    public int Strength = 0;
 }
 
-class Character : IFighter
+class Race : Class
 {
-
+    public int Armor = 0;
 }
 
-interface IFighter
-{
-	void Attack();
-	void CheckStats();
-}
+//class Character
+//{
+//    Race myRace = human;
+//    Class myClass;
+//    int armor = 0;
+//    int myHealth = myRace.health + myClass.health;
+//    int myStrength = myRace.strength + myClass.strength;
+//    int myArmor = myRace.armor + armor
+//}
 
+//interface IFighter
+//{
+//	void Attack();
+//	void CheckStats();
+//}
 //Dictionary<string, Character> characters = new Dictionary<string, Character>();
