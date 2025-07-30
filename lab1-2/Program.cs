@@ -4,33 +4,34 @@
     {
         Program program = new Program();
         List<int> numbers = new List<int>() { 4, 3, 2, 1 };
-        program.OptimizeBubbleSort( numbers );
-        program.PrintList( numbers );
+        OptimizeBubbleSort( numbers );
+        PrintList( numbers );
     }
-    private void OptimizeBubbleSort( List<int> numbers )
+    
+    private static void OptimizeBubbleSort(List<int> numbers)
     {
         bool isSorted = false;
-        for ( int j = 0; j < numbers.Count - 1 && !isSorted; j++ )
+        for (int j = 0; j < numbers.Count - 1 && !isSorted; j++)
         {
             isSorted = true;
-            for ( int i = 0; i < numbers.Count - 1; i++ )
+            for (int i = 0; i < numbers.Count - 1; i++)
             {
-                if ( numbers[ i ] > numbers[ i + 1 ] )
+                if (numbers[i] > numbers[i + 1])
                 {
                     isSorted = false;
-                    int temp = numbers[ i ];
-                    numbers[ i ] = numbers[ i + 1 ];
-                    numbers[ i + 1 ] = temp;
+                    int temp = numbers[i];
+                    numbers[i] = numbers[i + 1];
+                    numbers[i + 1] = temp;
                 }
             }
         }
     }
-    private void PrintList( List<int> list )
+    
+    private static void PrintList(List<int> list)
     {
-        foreach ( int el in list )
+        foreach (int el in list)
         {
-            Console.Write( $"{el}; " );
+            Console.Write($"{el}; ");
         }
     }
-
 }
