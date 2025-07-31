@@ -25,19 +25,25 @@
         {
             if ( 'A' <= ch && ch <= 'Z' )
             {
-                result += ( char )( 65 + ( ch - 65 + swap ) % 26 );
+                const int firstLetterCode = 65;
+                const int alpthabetLength = 26;
+                result += ( char )( firstLetterCode + ( ch - firstLetterCode + swap ) % alpthabetLength );
             }
             else if ( 'a' <= ch && ch <= 'z' )
             {
-                result += ( char )( 97 + ( ch - 97 + swap ) % 26 );
+                const int firstLetterCode = 97;
+                const int alpthabetLength = 26;
+                result += ( char )( firstLetterCode + ( ch - firstLetterCode + swap ) % alpthabetLength );
             }
             else if ( 'А' <= ch && ch <= 'Я' || ch == 'Ё' )
             {
-                result += russianAlphabetBig[ ( russianAlphabetBig.IndexOf( ch ) + swap ) % 33 ];
+                const int alpthabetLength = 33;
+                result += russianAlphabetBig[ ( russianAlphabetBig.IndexOf( ch ) + swap ) % alpthabetLength ];
             }
             else if ( 'а' <= ch && ch <= 'я' || ch == 'ё' )
             {
-                result += russianAlphabetSmall[ ( russianAlphabetSmall.IndexOf( ch ) + swap ) % 33 ];
+                const int alpthabetLength = 33;
+                result += russianAlphabetSmall[ ( russianAlphabetSmall.IndexOf( ch ) + swap ) % alpthabetLength ];
             }
             else
             {
@@ -54,19 +60,25 @@
         {
             if ( 'A' <= ch && ch <= 'Z' )
             {
-                result += ( char )( 65 + ( ch - 65 - swap % 26 + 26 ) % 26 );
+                const int firstLetterCode = 65;
+                const int alpthabetLength = 26;
+                result += ( char )( firstLetterCode + ( ch - firstLetterCode - swap % alpthabetLength + alpthabetLength ) % alpthabetLength );
             }
             else if ( 'a' <= ch && ch <= 'z' )
             {
-                result += ( char )( 97 + ( ch - 97 - swap % 26 + 26 ) % 26 );
+                const int firstLetterCode = 97;
+                const int alpthabetLength = 26;
+                result += ( char )( firstLetterCode + ( ch - firstLetterCode - swap % alpthabetLength + alpthabetLength ) % alpthabetLength );
             }
             else if ( 'А' <= ch && ch <= 'Я' || ch == 'Ё' )
             {
-                result += russianAlphabetBig[ ( russianAlphabetBig.IndexOf( ch ) - swap % 33 + 33 ) % 33 ];
+                const int alpthabetLength = 33;
+                result += russianAlphabetBig[ ( russianAlphabetBig.IndexOf( ch ) - swap % alpthabetLength + alpthabetLength ) % alpthabetLength ];
             }
             else if ( 'а' <= ch && ch <= 'я' || ch == 'ё' )
             {
-                result += russianAlphabetSmall[ ( russianAlphabetSmall.IndexOf( ch ) - swap % 33 + 33 ) % 33 ];
+                const int alpthabetLength = 33;
+                result += russianAlphabetSmall[ ( russianAlphabetSmall.IndexOf( ch ) - swap % alpthabetLength + alpthabetLength ) % alpthabetLength ];
             }
             else
             {
