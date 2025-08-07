@@ -80,10 +80,10 @@ class Game
         int characterIndex = characters.Count;
         characters.Add( new Character() );
         EnterName( characters[ characterIndex ] );
-        ChooseItemFromArray( characters[ characterIndex ].MyRace, races, "расы" );
-        ChooseItemFromArray( characters[ characterIndex ].MyClass, classes, "класса" );
-        ChooseItemFromArray( characters[ characterIndex ].MyWeapon, weapons, "оружия" ); //try get sets
-        ChooseItemFromArray( characters[ characterIndex ].MyArmor, armors, "брони" );
+        characters[ characterIndex ].MyRace = ChooseItemFromArray( races, "расы" );
+        characters[ characterIndex ].MyClass = ChooseItemFromArray( classes, "класса" );
+        characters[ characterIndex ].MyWeapon = ChooseItemFromArray( weapons, "оружия" ); //try get sets
+        characters[ characterIndex ].MyArmor = ChooseItemFromArray( armors, "брони" );
         PrintCharacterStats( characters[ characterIndex ] );
     }
 
@@ -94,7 +94,7 @@ class Game
         Console.WriteLine( "---------------------------------------------" );
     }
 
-    static void ChooseItemFromArray( NamedItems changingField, NamedItems[] array, string chooseItemName )
+    static Race ChooseItemFromArray( Race[] array, string chooseItemName )
     {
         Console.WriteLine( $"Выберите {chooseItemName} из списка ниже" );
         for ( int i = 1; i <= array.Length; i++ )
@@ -102,13 +102,14 @@ class Game
             Console.WriteLine( $"{i}. {array[ i - 1 ].Name}" );
         }
         bool isActionCorrect = false;
+        Race result = new();
         while ( !isActionCorrect )
         {
             try
             {
                 Console.Write( $"Введите номер {chooseItemName}: " );
                 string itemNum = Console.ReadLine();
-                changingField = array[ int.Parse( itemNum ) - 1 ];
+                result = array[ int.Parse( itemNum ) - 1 ];
                 isActionCorrect = true;
             }
             catch
@@ -117,113 +118,89 @@ class Game
             }
         }
         Console.WriteLine( "---------------------------------------------" );
+        return result;
     }
 
-    //static Race ChooseItemFromArray( Race[] array, string chooseItemName )
-    //{
-    //    Console.WriteLine( $"Выберите {chooseItemName} из списка ниже" );
-    //    for ( int i = 1; i <= array.Length; i++ )
-    //    {
-    //        Console.WriteLine( $"{i}. {array[ i - 1 ].Name}" );
-    //    }
-    //    bool isActionCorrect = false;
-    //    Race result = new();
-    //    while ( !isActionCorrect )
-    //    {
-    //        try
-    //        {
-    //            Console.Write( $"Введите номер {chooseItemName}: " );
-    //            string itemNum = Console.ReadLine();
-    //            result = array[ int.Parse( itemNum ) - 1 ];
-    //            isActionCorrect = true;
-    //        }
-    //        catch
-    //        {
-    //            Console.WriteLine( $"Введён некоректный номер {chooseItemName}" );
-    //        }
-    //    }
-    //    Console.WriteLine( "---------------------------------------------" );
-    //    return result;
-    //}
-    //static Class ChooseItemFromArray( Class[] array, string chooseItemName )
-    //{
-    //    Console.WriteLine( $"Выберите {chooseItemName} из списка ниже" );
-    //    for ( int i = 1; i <= array.Length; i++ )
-    //    {
-    //        Console.WriteLine( $"{i}. {array[ i - 1 ].Name}" );
-    //    }
-    //    bool isActionCorrect = false;
-    //    Class result = new();
-    //    while ( !isActionCorrect )
-    //    {
-    //        try
-    //        {
-    //            Console.Write( $"Введите номер {chooseItemName}: " );
-    //            string itemNum = Console.ReadLine();
-    //            result = array[ int.Parse( itemNum ) - 1 ];
-    //            isActionCorrect = true;
-    //        }
-    //        catch
-    //        {
-    //            Console.WriteLine( $"Введён некоректный номер {chooseItemName}" );
-    //        }
-    //    }
-    //    Console.WriteLine( "---------------------------------------------" );
-    //    return result;
-    //}
+    static Class ChooseItemFromArray( Class[] array, string chooseItemName )
+    {
+        Console.WriteLine( $"Выберите {chooseItemName} из списка ниже" );
+        for ( int i = 1; i <= array.Length; i++ )
+        {
+            Console.WriteLine( $"{i}. {array[ i - 1 ].Name}" );
+        }
+        bool isActionCorrect = false;
+        Class result = new();
+        while ( !isActionCorrect )
+        {
+            try
+            {
+                Console.Write( $"Введите номер {chooseItemName}: " );
+                string itemNum = Console.ReadLine();
+                result = array[ int.Parse( itemNum ) - 1 ];
+                isActionCorrect = true;
+            }
+            catch
+            {
+                Console.WriteLine( $"Введён некоректный номер {chooseItemName}" );
+            }
+        }
+        Console.WriteLine( "---------------------------------------------" );
+        return result;
+    }
 
-    //static Weapon ChooseItemFromArray( Weapon[] array, string chooseItemName )
-    //{
-    //    Console.WriteLine( $"Выберите {chooseItemName} из списка ниже" );
-    //    for ( int i = 1; i <= array.Length; i++ )
-    //    {
-    //        Console.WriteLine( $"{i}. {array[ i - 1 ].Name}" );
-    //    }
-    //    bool isActionCorrect = false;
-    //    Weapon result = new();
-    //    while ( !isActionCorrect )
-    //    {
-    //        try
-    //        {
-    //            Console.Write( $"Введите номер {chooseItemName}: " );
-    //            string itemNum = Console.ReadLine();
-    //            result = array[ int.Parse( itemNum ) - 1 ];
-    //            isActionCorrect = true;
-    //        }
-    //        catch
-    //        {
-    //            Console.WriteLine( $"Введён некоректный номер {chooseItemName}" );
-    //        }
-    //    }
-    //    Console.WriteLine( "---------------------------------------------" );
-    //    return result;
-    //}
-    //static Armor ChooseItemFromArray( Armor[] array, string chooseItemName )
-    //{
-    //    Console.WriteLine( $"Выберите {chooseItemName} из списка ниже" );
-    //    for ( int i = 1; i <= array.Length; i++ )
-    //    {
-    //        Console.WriteLine( $"{i}. {array[ i - 1 ].Name}" );
-    //    }
-    //    bool isActionCorrect = false;
-    //    Armor result = new();
-    //    while ( !isActionCorrect )
-    //    {
-    //        try
-    //        {
-    //            Console.Write( $"Введите номер {chooseItemName}: " );
-    //            string itemNum = Console.ReadLine();
-    //            result = array[ int.Parse( itemNum ) - 1 ];
-    //            isActionCorrect = true;
-    //        }
-    //        catch
-    //        {
-    //            Console.WriteLine( $"Введён некоректный номер {chooseItemName}" );
-    //        }
-    //    }
-    //    Console.WriteLine( "---------------------------------------------" );
-    //    return result;
-    //}
+    static Weapon ChooseItemFromArray( Weapon[] array, string chooseItemName )
+    {
+        Console.WriteLine( $"Выберите {chooseItemName} из списка ниже" );
+        for ( int i = 1; i <= array.Length; i++ )
+        {
+            Console.WriteLine( $"{i}. {array[ i - 1 ].Name}" );
+        }
+        bool isActionCorrect = false;
+        Weapon result = new();
+        while ( !isActionCorrect )
+        {
+            try
+            {
+                Console.Write( $"Введите номер {chooseItemName}: " );
+                string itemNum = Console.ReadLine();
+                result = array[ int.Parse( itemNum ) - 1 ];
+                isActionCorrect = true;
+            }
+            catch
+            {
+                Console.WriteLine( $"Введён некоректный номер {chooseItemName}" );
+            }
+        }
+        Console.WriteLine( "---------------------------------------------" );
+        return result;
+    }
+
+    static Armor ChooseItemFromArray( Armor[] array, string chooseItemName )
+    {
+        Console.WriteLine( $"Выберите {chooseItemName} из списка ниже" );
+        for ( int i = 1; i <= array.Length; i++ )
+        {
+            Console.WriteLine( $"{i}. {array[ i - 1 ].Name}" );
+        }
+        bool isActionCorrect = false;
+        Armor result = new();
+        while ( !isActionCorrect )
+        {
+            try
+            {
+                Console.Write( $"Введите номер {chooseItemName}: " );
+                string itemNum = Console.ReadLine();
+                result = array[ int.Parse( itemNum ) - 1 ];
+                isActionCorrect = true;
+            }
+            catch
+            {
+                Console.WriteLine( $"Введён некоректный номер {chooseItemName}" );
+            }
+        }
+        Console.WriteLine( "---------------------------------------------" );
+        return result;
+    }
 
     static void PrintCharacterStats( Character character )
     {
