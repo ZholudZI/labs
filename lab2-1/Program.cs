@@ -202,6 +202,14 @@ class Game
         return result;
     }
 
+    void printArray( NamedItems[] array )
+    {
+        for ( int i = 1; i <= array.Length; i++ )
+        {
+            Console.WriteLine( $"{i}. {array[ i - 1 ].Name}" );
+        }
+    }
+
     static void PrintCharacterStats( Character character )
     {
         Console.WriteLine( $"Ваш персонаж :" +
@@ -213,7 +221,7 @@ class Game
     }
 }
 
-class NamedItems
+class NamedItems //Kill me pls (
 {
     string _name = "Unnamed";
     public string Name
