@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace lab_2
 {
-    public class Character
+    public class Character : IFighter
     {
         private string _name = "Unnamed";
         public string Name
@@ -21,15 +21,15 @@ namespace lab_2
             }
         }
 
+        public int Number;
         public Race MyRace;
         public Class MyClass;
         public Weapon MyWeapon;
         public Armor MyArmor;
-        public int Protection = 0;
 
-        public int MyHealth = 0;
-        public int MyStrength => MyRace.Strength + MyClass.Strength;
-        public int MyProtection => MyRace.Protection + Protection;
+        public int MyHealth { get; set; }
+        public int MyStrength => MyRace.Strength + MyClass.Strength + MyWeapon.Strength;
+        public int MyProtection => MyRace.Protection + MyArmor.Protection;
 
         public void updateHealth()
         {
@@ -40,34 +40,28 @@ namespace lab_2
         {
             Console.WriteLine( $"Ваш персонаж :" +
                 $"\n- Имя:    {Name}" +
+                $"\n- Номер:  {Number}" +
                 $"\n- Раса:   {MyRace.Name}" +
                 $"\n- Класс:  {MyClass.Name}" +
                 $"\n- Оружие: {MyWeapon.Name}" +
                 $"\n- Броня:  {MyArmor.Name}\n---------------------------------------------" );
         }
 
-        //public IFighter Attack( IFighter[] characters, int characterIndex )
-        //{
-        //    if ( characterIndex + 2 <= characters.Length )
-        //    {
-        //        return 
-        //    }
-        //}
-        public Character Attack( Character defender )
+        public IFighter Attack( IFighter defender )
         {
             defender.MyHealth -= Math.Max( MyStrength - defender.MyProtection, 0 );
+            CheckStats( defender );
+            Console.ReadKey();
             if ( defender.MyHealth > 0 )
             {
-                Console.WriteLine( MyHealth );
-                Console.WriteLine( defender.MyHealth );
-                return defender.Attack( this ); // Рекурсия видимо ¯\_(ツ)_/
+                return defender.Attack( this ); // Рекурсия видимо ¯\_(ツ)_/¯ Тесты может написать?
             }
             return this;
         }
 
-        public void CheckStats( Character defender )
+        public void CheckStats( IFighter defender )
         {
-
+            Console.WriteLine( $"{Name} нанёс {Math.Max( MyStrength - defender.MyProtection, 0 )} урона. Его здоровье {MyHealth}" );
         }
     }
 }

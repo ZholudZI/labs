@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -58,7 +59,8 @@ namespace lab_2
                 case ( "3" ):
                     if ( characters.Count > 1 )
                     {
-                        Battle( 0, 1 );
+                        StartBattle();
+                        Console.WriteLine( "---------------------------------------------" );
                     }
                     else
                     {
@@ -75,7 +77,7 @@ namespace lab_2
         static void CreateCharacter( List<Character> characters )
         {
             int characterIndex = characters.Count;
-            characters.Add( new Character() );
+            characters.Add( new Character() { Number = characterIndex + 1 } );
             EnterName( characters[ characterIndex ] );
             characters[ characterIndex ].MyRace = Chooser<Race>.ChooseItemFromArray( races, "расы" );
             characters[ characterIndex ].MyClass = Chooser<Class>.ChooseItemFromArray( classes, "класса" );
@@ -102,9 +104,52 @@ namespace lab_2
             }
         }
 
-        static void Battle( int firstCharacterIndex, int secondCharacterIndex )
+        static void StartBattle()
         {
-            Console.WriteLine( characters[ firstCharacterIndex ].Attack( characters[ secondCharacterIndex ] ).Name );
+            Battle( EnterCharacterNumbers() );
+        }
+
+        static List<Character> EnterCharacterNumbers()
+        {
+            List<Character> fighters = new() { characters[ 0 ], characters[ 1 ] };
+            bool isActionCorrect = false;
+            while ( !isActionCorrect )
+            {
+                isActionCorrect = true;
+                try
+                {
+                    Console.Write( "Введите номер первого бойца: " );
+                    string firstFigtherNumber = Console.ReadLine();
+                    fighters[ 0 ] = characters[ int.Parse( firstFigtherNumber ) - 1 ];
+                    Console.Write( "Введите номер второго бойца: " );
+                    string secondFigtherNumber = Console.ReadLine();
+                    fighters[ 1 ] = characters[ int.Parse( secondFigtherNumber ) - 1 ];
+                    if ( firstFigtherNumber == secondFigtherNumber )
+                    {
+                        Console.WriteLine( "Боец не может сражаться сам с собой" );
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine( "Введён некорректный номер бойца" );
+                    isActionCorrect = false;
+                }
+                Console.WriteLine( "---------------------------------------------" );
+            }
+            return fighters;
+        }
+
+        static void Battle( List<Character> fighters )
+        {
+            Console.WriteLine( "----Начало битвы----" );
+            if ( fighters[ 0 ].MyStrength - fighters[ 1 ].MyProtection > 0 || fighters[ 1 ].MyStrength - fighters[ 0 ].MyProtection > 0 )
+            {
+                Console.WriteLine( $"Победил {fighters[ 0 ].Attack( fighters[ 1 ] ).Name}" );
+            }
+            else
+            {
+                Console.WriteLine( "Ничья" );
+            }
         }
     }
 }

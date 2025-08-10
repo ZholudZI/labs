@@ -8,6 +8,10 @@ namespace lab_2
 {
     public interface IFighter
     {
-        public void Attack( IFighter defender );
+        public string Name { get; set; }
+        public int MyHealth { get; set; }
+        public int MyStrength { get; }
+        public int MyProtection { get; }
+        public IFighter Attack( IFighter defender );
     }
 }
