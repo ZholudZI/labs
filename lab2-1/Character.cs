@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace lab_2
 {
-    internal class Character
+    public class Character
     {
         private string _name = "Unnamed";
         public string Name
@@ -20,23 +20,54 @@ namespace lab_2
                 }
             }
         }
-        public Race MyRace = new Race();
-        public Class MyClass = new Class();
-        public Weapon MyWeapon = new Weapon();
-        public Armor MyArmor = new Armor();
-        int Protection = 0;
-        int MyHealth => MyRace.Health + MyClass.Health;
-        int MyStrength => MyRace.Strength + MyClass.Strength;
-        int MyProtection => MyRace.Protection + Protection;
+
+        public Race MyRace;
+        public Class MyClass;
+        public Weapon MyWeapon;
+        public Armor MyArmor;
+        public int Protection = 0;
+
+        public int MyHealth = 0;
+        public int MyStrength => MyRace.Strength + MyClass.Strength;
+        public int MyProtection => MyRace.Protection + Protection;
+
+        public void updateHealth()
+        {
+            MyHealth = MyRace.Health + MyClass.Health;
+        }
 
         public void PrintCharacterStats()
         {
             Console.WriteLine( $"Ваш персонаж :" +
-                $"\n- Имя: {Name}" +
-                $"\n- Раса: {MyRace.Name}" +
-                $"\n- Класс: {MyClass.Name}" +
+                $"\n- Имя:    {Name}" +
+                $"\n- Раса:   {MyRace.Name}" +
+                $"\n- Класс:  {MyClass.Name}" +
                 $"\n- Оружие: {MyWeapon.Name}" +
-                $"\n- Броня: {MyArmor.Name}" );
+                $"\n- Броня:  {MyArmor.Name}\n---------------------------------------------" );
+        }
+
+        //public IFighter Attack( IFighter[] characters, int characterIndex )
+        //{
+        //    if ( characterIndex + 2 <= characters.Length )
+        //    {
+        //        return 
+        //    }
+        //}
+        public Character Attack( Character defender )
+        {
+            defender.MyHealth -= Math.Max( MyStrength - defender.MyProtection, 0 );
+            if ( defender.MyHealth > 0 )
+            {
+                Console.WriteLine( MyHealth );
+                Console.WriteLine( defender.MyHealth );
+                return defender.Attack( this ); // Рекурсия видимо ¯\_(ツ)_/
+            }
+            return this;
+        }
+
+        public void CheckStats( Character defender )
+        {
+
         }
     }
 }

@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace lab_2
 {
-    internal class Game
+    public static class Game
     {
+        static private List<Character> characters = new();
+
         static private Class[] classes = {
             new Class() { Name = "Воин", Health = 20, Strength = 3 },
             new Class() { Name = "Лучник", Health = 15, Strength = 1 },
@@ -34,40 +36,39 @@ namespace lab_2
         static private Armor[] armors =
         {
             new Armor() { Name = "Кожанный нагрудник", Protection = 3},
-            new Armor() { Name = "Золотоцй нагрудник",  Protection = 4},
+            new Armor() { Name = "Золотой нагрудник",  Protection = 4},
             new Armor() { Name = "Железный нагрудник", Protection = 6},
             new Armor() { Name = "Алмазный нагрудник", Protection = 8},
         };
 
-        public static void ChoseAction( List<Character> characters )
+        public static void ChooseAction()
         {
-            Console.WriteLine( "Что хотите сделать?\n  1. Создать персонажа\n  2. Начать битву" );
-            bool isActionCorrect = false;
-            while ( !isActionCorrect )
+            Console.WriteLine( "Что хотите сделать?\n  1. Создать персонажа\n  2. Вывести список персонажей\n  3. Начать битву" );
+            Console.Write( "Введите номер действия: " );
+            string action = Console.ReadLine();
+            Console.WriteLine( "---------------------------------------------" );
+            switch ( action )
             {
-                isActionCorrect = true;
-                string action = Console.ReadLine();
-                switch ( action )
-                {
-                    case ( "1" ):
-                        CreateCharacter( characters );
-                        break;
-                    case ( "2" ):
-                        if ( characters.Count > 1 )
-                        {
-                            Console.WriteLine( "Battle" );
-                        }
-                        else
-                        {
-                            Console.WriteLine( "Нельзя начать битву, имея менее двух персонажей. Выберите другое действие" );
-                            isActionCorrect = false;
-                        }
-                        break;
-                    default:
-                        isActionCorrect = false;
-                        Console.WriteLine( "Выбрано некорректное действией. Введите действие снова" );
-                        break;
-                }
+                case ( "1" ):
+                    CreateCharacter( characters );
+                    break;
+                case ( "2" ):
+                    PrintCharacterList();
+                    break;
+                case ( "3" ):
+                    if ( characters.Count > 1 )
+                    {
+                        Battle( 0, 1 );
+                    }
+                    else
+                    {
+                        Console.WriteLine( "Нельзя начать битву, имея менее двух персонажей. Выберите другое действие" );
+                    }
+                    break;
+                default:
+                    Console.WriteLine( "Выбрано некорректное действией. Введите действие снова" );
+                    Console.WriteLine( "---------------------------------------------" );
+                    break;
             }
         }
 
@@ -76,11 +77,13 @@ namespace lab_2
             int characterIndex = characters.Count;
             characters.Add( new Character() );
             EnterName( characters[ characterIndex ] );
-            characters[ characterIndex ].MyRace = ChooseItemFromArray( races, "расы" );
-            characters[ characterIndex ].MyClass = ChooseItemFromArray( classes, "класса" );
-            characters[ characterIndex ].MyWeapon = ChooseItemFromArray( weapons, "оружия" ); //try get sets
-            characters[ characterIndex ].MyArmor = ChooseItemFromArray( armors, "брони" );
-            PrintCharacterStats( characters[ characterIndex ] );
+            characters[ characterIndex ].MyRace = Chooser<Race>.ChooseItemFromArray( races, "расы" );
+            characters[ characterIndex ].MyClass = Chooser<Class>.ChooseItemFromArray( classes, "класса" );
+            characters[ characterIndex ].MyWeapon = Chooser<Weapon>.ChooseItemFromArray( weapons, "оружия" );
+            characters[ characterIndex ].MyArmor = Chooser<Armor>.ChooseItemFromArray( armors, "брони" );
+            characters[ characterIndex ].updateHealth();
+            Console.Clear();
+            characters[ characterIndex ].PrintCharacterStats();
         }
 
         static void EnterName( Character character )
@@ -90,79 +93,18 @@ namespace lab_2
             Console.WriteLine( "---------------------------------------------" );
         }
 
-        static Class ChooseItemFromArray( Class[] array, string chooseItemName )
+        static void PrintCharacterList()
         {
-            Console.WriteLine( $"Выберите {chooseItemName} из списка ниже" );
-            printArray( array );
-            bool isActionCorrect = false;
-            Class result = new();
-            while ( !isActionCorrect )
+            Console.Clear();
+            foreach ( Character character in characters )
             {
-                try
-                {
-                    Console.Write( $"Введите номер {chooseItemName}: " );
-                    string itemNum = Console.ReadLine();
-                    result = array[ int.Parse( itemNum ) - 1 ];
-                    isActionCorrect = true;
-                }
-                catch
-                {
-                    Console.WriteLine( $"Введён некоректный номер {chooseItemName}" );
-                }
+                character.PrintCharacterStats();
             }
-            Console.WriteLine( "---------------------------------------------" );
-            return result;
         }
 
-        static Weapon ChooseItemFromArray( Weapon[] array, string chooseItemName )
+        static void Battle( int firstCharacterIndex, int secondCharacterIndex )
         {
-            Console.WriteLine( $"Выберите {chooseItemName} из списка ниже" );
-            printArray( array );
-            bool isActionCorrect = false;
-            Weapon result = new();
-            while ( !isActionCorrect )
-            {
-                try
-                {
-                    Console.Write( $"Введите номер {chooseItemName}: " );
-                    string itemNum = Console.ReadLine();
-                    result = array[ int.Parse( itemNum ) - 1 ];
-                    isActionCorrect = true;
-                }
-                catch
-                {
-                    Console.WriteLine( $"Введён некоректный номер {chooseItemName}" );
-                }
-            }
-            Console.WriteLine( "---------------------------------------------" );
-            return result;
-        }
-
-        static Armor ChooseItemFromArray( Armor[] array, string chooseItemName )
-        {
-            Console.WriteLine( $"Выберите {chooseItemName} из списка ниже" );
-            for ( int i = 1; i <= array.Length; i++ )
-            {
-                Console.WriteLine( $"{i}. {array[ i - 1 ].Name}" );
-            }
-            bool isActionCorrect = false;
-            Armor result = new();
-            while ( !isActionCorrect )
-            {
-                try
-                {
-                    Console.Write( $"Введите номер {chooseItemName}: " );
-                    string itemNum = Console.ReadLine();
-                    result = array[ int.Parse( itemNum ) - 1 ];
-                    isActionCorrect = true;
-                }
-                catch
-                {
-                    Console.WriteLine( $"Введён некоректный номер {chooseItemName}" );
-                }
-            }
-            Console.WriteLine( "---------------------------------------------" );
-            return result;
+            Console.WriteLine( characters[ firstCharacterIndex ].Attack( characters[ secondCharacterIndex ] ).Name );
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace lab_2
 {
-    internal class Weapon : IChooseableItem
+    public class Weapon : IChooseableItem
     {
         private string _name = "Unnamed";
         public string Name

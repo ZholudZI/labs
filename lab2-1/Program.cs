@@ -1,12 +1,15 @@
 ﻿using System.Runtime.CompilerServices;
+using lab_2;
 
 class Program
 {
 
     static void Main( string[] args )
     {
-        List<Character> characters = new List<Character>();
-        Game.ChoseAction( characters );
+        while ( true )
+        {
+            Game.ChooseAction();
+        }
     }
 }
 
